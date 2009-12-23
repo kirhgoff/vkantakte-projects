@@ -1,0 +1,45 @@
+<project name="vkontakte-projects" default="build">
+	<property name="build.distrib" value="./distrib" />
+	<property name="build.source" value="./src" />
+	<property name="build.lib" value="./lib" />
+	<property name="build.out" value="./out" />
+	<property name="build.bin" value="./bin" />
+	<property name="build.docroot" value="./docroot" />
+
+	<path id="build.classpath">
+		<fileset dir="${build.lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="build">
+		<delete dir="${build.distrib}"/>
+		<mkdir dir="${build.distrib}" />
+
+		<javac srcdir="${build.source}" destdir="${build.out}">
+			<classpath refid="build.classpath" />
+		</javac>
+
+		<mkdir dir="distrib/lib" />
+		<jar destfile="${build.distrib}/lib/vkontakte-projects.jar" basedir="${build.out}" includes="**/*.class" />
+		
+		<copy todir="${build.distrib}/lib">
+			<fileset dir="${build.lib}">
+				<include name="org.mortbay.jetty.jar" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build.distrib}/bin">
+			<fileset dir="${build.bin}">
+				<include name="*.cmd" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build.distrib}/docroot">
+			<fileset dir="${build.docroot}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+	</target>
+</project>
