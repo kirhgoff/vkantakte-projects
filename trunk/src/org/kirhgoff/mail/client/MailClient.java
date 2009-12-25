@@ -1,6 +1,6 @@
 package org.kirhgoff.mail.client;
 
-import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -33,14 +33,15 @@ public static void main(String[] args) throws Exception {
     Session session = Session.getDefaultInstance(props, null);
     Store store = session.getStore(provider);
     store.connect(host, username, password);
-    
+
     System.out.println("Getting folder.");
     Folder inbox = store.getFolder("INBOX");
     if (inbox == null) {
       System.out.println("No INBOX");
       System.exit(1);
     }
-    inbox.open(Folder.READ_ONLY);
+    System.out.println("permanent flags = " + Arrays.asList(inbox.getPermanentFlags().getUserFlags()));
+    inbox.open(Folder.HOLDS_MESSAGES);
 
     System.out.println("Getting messages");
     Message[] messages = inbox.getMessages();
