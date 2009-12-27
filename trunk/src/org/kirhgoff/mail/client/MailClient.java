@@ -13,24 +13,24 @@ import javax.mail.Store;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
+import org.kirhgoff.conf.PropertyLoader;
+
 public class MailClient {
 
-  private static String mailFileRoot;
+private static String mailFileRoot;
 
 public static void main(String[] args) throws Exception {
 
-    Properties props = new Properties();
-    Properties instanceProps = new Properties ();
-    instanceProps.load(MailClient.class.getResourceAsStream("/dev.properties"));
+    Properties instanceProps = PropertyLoader.getInstance("dev");
     
-    String host = instanceProps.getProperty("mail.host");
-    String username = instanceProps.getProperty("mail.username");
-    String password = instanceProps.getProperty("mail.password");
-    String provider = instanceProps.getProperty("mail.provider");
-    mailFileRoot = instanceProps.getProperty("mail.file.root");
+    String host = instanceProps.getProperty(PropertyLoader.MAIL_HOST);
+    String username = instanceProps.getProperty(PropertyLoader.MAIL_USERNAME);
+    String password = instanceProps.getProperty(PropertyLoader.MAIL_PASSWORD);
+    String provider = instanceProps.getProperty(PropertyLoader.MAIL_PROVIDER);
+    mailFileRoot = instanceProps.getProperty(PropertyLoader.MAIL_FILE_ROOT);
     
     System.out.println("Loaded properties: username=" + username + ", host=" + host);
-    Session session = Session.getDefaultInstance(props, null);
+    Session session = Session.getDefaultInstance(new Properties(), null);
     Store store = session.getStore(provider);
     store.connect(host, username, password);
 

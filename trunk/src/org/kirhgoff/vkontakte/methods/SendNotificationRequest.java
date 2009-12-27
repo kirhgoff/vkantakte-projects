@@ -23,4 +23,8 @@ public class SendNotificationRequest {
 	public String getURL () throws Exception {
 		return request.getURL() + "&uid=" + uid + "&message=" + URLEncoder.encode(message, "UTF-8"); 
 	}
+	
+	public void setTestMode (boolean testMode) {
+		request.setTestMode (testMode);
+	}
 }
