@@ -15,7 +15,7 @@ public class VkontakteRequest {
 	private String method;
 	private Object secret;
 	
-	private boolean testMode = true;
+	private boolean testMode = false;
 
 	public VkontakteRequest(String vkontakteAPI) {
 		this.vkontakteApiURL = vkontakteAPI;
@@ -85,6 +85,10 @@ public class VkontakteRequest {
 		sb.append ("v=").append (version);
 		sb.append (secret);
 		return sb.toString().getBytes();
+	}
+
+	public void setTestMode(boolean testMode) {
+		this.testMode = testMode;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
-import org.kirhgoff.mail.client.MailClient;
+import org.kirhgoff.conf.PropertyLoader;
 
 import sun.net.www.protocol.http.HttpURLConnection;
 
@@ -17,16 +17,15 @@ public class VkontakteClient {
 	}
 
 	private static void sendNotification(int uid, String string) throws Exception {
-	    Properties instanceProps = new Properties ();
-	    instanceProps.load(MailClient.class.getResourceAsStream("/dev.properties"));
+	    Properties instanceProps = PropertyLoader.getInstance("dev");
 		
 		SendNotificationRequest request = new SendNotificationRequest (instanceProps, uid, "Hello buddy!");
+		request.setTestMode(false);
 		System.out.println("Sending request: " + request.getURL());
 		HttpURLConnection connection = new HttpURLConnection (new URL (request.getURL()), null);
 		connection.connect();
 		InputStream inputStream = connection.getInputStream();
-		String string2 = IOUtils.toString(inputStream);
-		System.out.println(string2);
+		System.out.println(IOUtils.toString(inputStream));
 		
 	}
 }
