@@ -8,5 +8,13 @@ import com.twolattes.json.Value;
 @Entity
 public class FilesList {
 	@Value
-	public List<String>[] names;
+	public List<String> names;
+
+	public FilesList() {
+	}
+	
+	public void setNames(List<String> strings) {
+		names = strings;
+	}
+
 }
