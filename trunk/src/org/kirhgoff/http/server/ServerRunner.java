@@ -1,5 +1,8 @@
 package org.kirhgoff.http.server;
 
+import java.util.Properties;
+
+import org.kirhgoff.conf.PropertyLoader;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.nio.SelectChannelConnector;
@@ -9,6 +12,8 @@ public class ServerRunner {
 	private Server server;
 
 	public void init () throws Exception {
+	    PropertyLoader.loadEnvironment("dev");
+	    
         server = new Server();
         Connector connector=new SelectChannelConnector();
         connector.setPort(8080);

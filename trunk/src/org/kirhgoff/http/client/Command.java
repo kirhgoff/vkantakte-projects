@@ -12,7 +12,12 @@ import sun.net.www.protocol.http.HttpURLConnection;
 
 public class Command {
 
+	//methods
 	public static final String GET_LIST_OF_FILES = "getListOfFiles";
+	
+	//parameters
+	public static final String USER_ID = "user_id";
+	
 	private final String serverURL; // TODO optimize connection logic - do not
 									// reconnect every time
 	private Map<String, String> parameters = new HashMap<String, String>();
@@ -38,7 +43,7 @@ public class Command {
 			for (Iterator<String> iterator = parameters.keySet().iterator(); iterator.hasNext();) {
 				String name = (String) iterator.next();
 				String value = parameters.get(name);
-				httpConnection.setRequestProperty(name, value);
+				httpConnection.addRequestProperty(name, value);
 			}
 			httpConnection.connect();
 			//InputStream inputStream = httpConnection.getInputStream();
