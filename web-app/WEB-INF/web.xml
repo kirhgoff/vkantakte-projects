@@ -14,7 +14,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>MethodInvoker</servlet-name>
-		<servlet-class>org.kirhgoff.vkontakte.server.MethodServlet</servlet-class>
+		<servlet-class>org.kirhgoff.http.server.MethodInvokerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MethodInvoker</servlet-name>
