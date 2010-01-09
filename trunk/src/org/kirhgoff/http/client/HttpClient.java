@@ -10,6 +10,7 @@ public class HttpClient {
 
 	private static void runTest() throws Exception {
 		Command command = new Command("http://localhost:8080/MethodInvoker", Command.GET_LIST_OF_FILES);
+		//Command command = new Command("http://localhost/test.php", Command.GET_LIST_OF_FILES);
 		command.addParameter(Command.USER_ID, "kirill.lastovirya");
 
 		System.out.println("Printing file names:");

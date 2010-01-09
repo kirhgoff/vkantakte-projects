@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +29,10 @@ public class MethodInvokerServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	      throws ServletException, IOException {
 		
+		log.info ("=======================================================");
 		String methodName = request.getHeader("methodName");
 		log.info ("Received request, methodName=" + methodName);
-		log.debug("REQUEST: " + request.toString());
+		log.debug("REQUEST: \n" + request.toString());
 		String result = null;
 		try {
 		if (methodName.equals(Command.GET_LIST_OF_FILES)) {
@@ -45,8 +47,10 @@ public class MethodInvokerServlet extends HttpServlet {
 			result = "ERROR: " + e.getMessage();
 		}
 		response.setHeader("result", result);
+		ServletOutputStream outputStream = response.getOutputStream();
+		outputStream.write(result.getBytes());
 		response.flushBuffer();
-		log.info("Sent response: " + result);
+		log.info("Sent response: " + response);
 	  }
 
 	private String getListOfFiles(HttpServletRequest request) throws Exception {
